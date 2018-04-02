@@ -1,5 +1,6 @@
 node_modules
 bower_components
 /build-*/
+/public/uploadimg
 data
 package-lock.json
