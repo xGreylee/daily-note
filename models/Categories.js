@@ -1,6 +1,6 @@
-var mongoose = require('mongoose')
+const mongoose = require('mongoose')
 
-var CategorySchema = new mongoose.Schema({
+const CategorySchema = new mongoose.Schema({
 	name: String,
 	posts: [{
 		type: mongoose.Schema.Types.ObjectId,

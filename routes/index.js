@@ -25,7 +25,7 @@ router.get('/', function(req, res) {
 })
 
 router.post('/uploadimg', function(req, res, next) {
-	var form = new formidable.IncomingForm()
+	const form = new formidable.IncomingForm()
 	form.parse(req, function(err, fields, files) {
 		// console.log('files:', files)
 		if (err) {
@@ -33,13 +33,12 @@ router.post('/uploadimg', function(req, res, next) {
 		}
 
 		console.log('formidable, form.parse ok')
-
 		console.log('显示上传时的参数 begin')
 		console.log(fields)
 		console.log('显示上传时的参数 end')
 
 		let item
-		var length = 0
+		let length = 0
 		for (item in files) {
 			length++
 		}
@@ -49,22 +48,22 @@ router.post('/uploadimg', function(req, res, next) {
 		}
 
 		for (item in files) {
-			var file = files[item]
-			var tempfilepath = file.path
+			const file = files[item]
+			const tempfilepath = file.path
 			console.log('tempfilepath:', tempfilepath)
 
-			var type = file.type
-			var filename = file.name
-			var extname = filename.lastIndexOf('.') >= 0 ? filename.slice(filename.lastIndexOf('.') - filename.length) : ''
+			const type = file.type
+			const filename = file.name
+			const extname = filename.lastIndexOf('.') >= 0 ? filename.slice(filename.lastIndexOf('.') - filename.length) : ''
 
 			if (extname === '' && type.indexOf('/') >= 0) {
 				extname = '.' + type.split('/')[1]
 			}
 			filename = Math.random().toString().slice(2) + extname
 			console.log('new filename:', filename)
-			var filenewpath = path.join(uploadfolderpath, filename)
-			var is = fs.createReadStream(tempfilepath)
-			var os = fs.createWriteStream(filenewpath)
+			const filenewpath = path.join(uploadfolderpath, filename)
+			const is = fs.createReadStream(tempfilepath)
+			const os = fs.createWriteStream(filenewpath)
 			is.pipe(os)
 			is.on('end', function() {
 				fs.unlinkSync(tempfilepath, filenewpath)
